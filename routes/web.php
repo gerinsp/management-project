@@ -17,6 +17,9 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::resource('/dashboard', DashboardController::class);
+Route::get('/', function() {
+    return redirect('/dashboard');
+});
 
 Route::get('/kalkulator', function() {
     return view('kalkulator', [

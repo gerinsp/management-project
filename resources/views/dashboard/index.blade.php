@@ -48,8 +48,7 @@
                                             class="badge btn-info text-decoration-none">Lihat</a>
                                         <a href="/dashboard/{{ $project->id }}/edit"
                                             class="badge btn-warning text-decoration-none">Edit</span></a>
-                                        <form action="/dashboard/destroy/{{ $project->id }}" method="post"
-                                            class="d-inline">
+                                        <form action="/dashboard/{{ $project->id }}" method="post" class="d-inline">
                                             @method('delete')
                                             @csrf
                                             <button class="badge btn-danger border-0"

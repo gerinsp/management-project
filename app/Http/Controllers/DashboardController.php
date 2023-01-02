@@ -15,7 +15,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $project = Project::paginate(2);
+        $project = Project::paginate(4);
         return view('dashboard.index', [
             'title' => 'Dashboard',
             'active' => 'dashboard',
@@ -78,7 +78,13 @@ class DashboardController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = Project::find($id);
+
+        return view('dashboard.edit', [
+            'title' => 'Edit Project',
+            'active' => 'dashboard',
+            'project' => $project
+        ]);
     }
 
     /**
@@ -90,7 +96,14 @@ class DashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => ['required'],
+            'detail' => ['required']
+        ]);
+
+        Project::where('id', $id)->update($validatedData);
+
+        return redirect('dashboard')->with('success', 'Data berhasil diupdate!');
     }
 
     /**
@@ -101,6 +114,8 @@ class DashboardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Project::destroy($id);
+        
+        return redirect('dashboard')->with('success', 'Data berhasil dihapus!');
     }
 }
